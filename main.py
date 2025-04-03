@@ -1,10 +1,5 @@
-'''
-    Напишіть консольного бота помічника, який розпізнаватиме команди, 
-    що вводяться з клавіатури, та буде відповідати відповідно до введеної команди.
-'''
-
-import src.scripts.contacts as contacts
 from colorama import Fore, Back, Style
+from scripts import contacts
 
 def parse_input(user_input):
     cmd, *args = user_input.split()
@@ -45,14 +40,21 @@ def main():
             contacts.add(*args)
         elif cmd == 'remove':
             contacts.remove(*args)
-        elif cmd == 'update':
-            contacts.update(*args)
-        elif cmd == 'show':
-            contacts.show(*args)
+        elif cmd == 'change':
+            contacts.change(*args)
+        elif cmd == 'phone':
+            contacts.phone(*args)
         elif cmd == 'all':
             contacts.all()
+        elif cmd == 'add-birthday':
+            contacts.add_birthday(*args)
+        elif cmd == 'show-birthday':
+            contacts.show_birthday(*args)
+        elif cmd == 'birthdays':
+            contacts.birthdays()
         else:
             print(Fore.YELLOW + 'Unknown command. Please try again.')
+    
         
 if __name__ == '__main__':
     main()
