@@ -9,13 +9,15 @@ def parse_input(user_input):
 def main():
     '''
         Main function for the assistant bot
-        takes following commands:
+        takes following commands:add
         - hello - greets the user
         - add <name> <phone> - adds a contact
-        - remove <name> - removes a contact
-        - update <name> <phone> - updates a contact
-        - show <name> - shows a contact
+        - change <name> <old_phone> <new_phone> - replace phone number 
+        - phone <name> - shows all phones of a contact
         - all - shows all contacts
+        - add-birthday <name> <birthday>- add birthday to the contact
+        - show-birthday <name> - show birthday date of the contact
+        - birthdays - show all upcoming birthdays for the next week (workdays)
         - close/exit - closes the bot
     '''
     print( Back.LIGHTWHITE_EX + Fore.BLACK + "Welcome to the assistant bot!" + Style.RESET_ALL)
@@ -38,8 +40,6 @@ def main():
             print(Fore.GREEN + 'Hello! I am your assistant, how can I help you?' + Style.RESET_ALL)
         elif cmd == 'add':
             contacts.add(*args)
-        elif cmd == 'remove':
-            contacts.remove(*args)
         elif cmd == 'change':
             contacts.change(*args)
         elif cmd == 'phone':

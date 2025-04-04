@@ -33,10 +33,10 @@ def check_arguments(min_args: int):
     return decorator
 
 def exception_handler(func):
-    def decorator(*args, **kwargs):
+    def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
         except ValueError as e:
             print(f"Error: {e}") 
             return None  
-    return decorator
+    return inner

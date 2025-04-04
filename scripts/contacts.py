@@ -28,8 +28,8 @@ class Phone(Field):
         self.validate_phone(phone)
         super().__init__(phone)
     def validate_phone(self, phone):
-        if not re.match(r'^\d{1,10}$', phone):
-            raise ValueError(f'Invalid phone number: {phone}. Phone must be no longer then 10 digits')
+        if not re.match(r'^\d{10}$', phone):
+            raise ValueError(f'Invalid phone number: {phone}. Phone must be exactly 10 digits')
 
 # Birthday
 class Birthday(Field): 
@@ -190,10 +190,11 @@ def phone(*args: tuple):
 @input_error
 def all():
     
+    if not book.data:
+        print(f'No records found')
+        return 1
+    
     for record in book.data.values():
-        if not record:
-            print(f'No records found')
-            return 1
         print(f'{record.name}:')
         for phone in record.phones:
             print(f'--tel:{phone}')
@@ -208,9 +209,11 @@ def add_birthday(*args:tuple):
     name = " ".join(name_parts) 
     
     record = book.find(name)
+    
     if not record:
-        print(f'Record {name} is not found')
+        print(Fore.RED + f'Error: Contact "{name}" not found. Cannot add birthday.' + Style.RESET_ALL)
         return 1
+    
     record.add_birthday(birthday)
     print(f'Birthday added')
             
@@ -236,7 +239,7 @@ def show_birthday(*args:tuple):
 def birthdays():
     birthdays = book.get_upcoming_birthdays()
     for birthday in birthdays:
-        print(f'{birthday['name']} has birthday on {birthday['congratulation_date']}')
+        print(f"{birthday['name']} has birthday on {birthday['congratulation_date']}")
     return 0
 
 def close():
